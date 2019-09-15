@@ -18,6 +18,7 @@ public class Wheel extends Circle {
 	public void physicsStep(double dt) {
 		double accel = (torque - (rollResistCoef * weight)) / mass;
 		rollSpeed += accel * dt;
+		System.out.println("Wheel speed: " + rollSpeed);
 	}
 	
 	public double getRollSpeed() {
