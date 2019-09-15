@@ -55,12 +55,20 @@ public class Controller {
     }
 
     @FXML
-    private void onSaveFile_pressed(ActionEvent event) {
+    private void onSaveFile_pressed(ActionEvent event) throws IOException {
         System.out.println("Save file clicked!");
         FileChooser chooser = new FileChooser();
         chooser.setTitle("Save log file");
         chooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("LOG", "*.log"));
         final File file = chooser.showSaveDialog(Main.getStage());
+        FileWriter fw = new FileWriter(file);
+        StringBuilder sb = new StringBuilder();
+        for (String st :
+                txtFileLines) {
+            sb.append(st);
+            sb.append("\n");
+        }
+        fw.write(sb.toString());
     }
 
     @FXML
@@ -71,7 +79,7 @@ public class Controller {
         StringBuilder sb = new StringBuilder();
         for (String st :
                 txtFileLines) {
-            st = st.replaceAll(" 0,0", "null");
+            st = st.replaceAll(" 0,0", " null");
             st = st.replaceAll(" {3}0[^,]", "null");
             buffer.add(st);
             sb.append(st);
